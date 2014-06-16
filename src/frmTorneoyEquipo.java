@@ -234,8 +234,12 @@ void cargarTabla(){
 //        List<Arbitro> results = q1.getResultList();
 //        //System.out.println( results.toString());
         String[] nombre= new String[2];
-        Torneo tor = em.find(Torneo.class, cmbTorneos.getSelectedItem().toString());        
-       if(tor.getEquipos()==null) return;
+        Torneo tor = em.find(Torneo.class, cmbTorneos.getSelectedItem().toString());
+        
+       if(tor.getEquipos()==null){
+           System.out.println("No hay equipos que cargar en la tabla");
+           return;   
+       }
         for(Equipo e: tor.getEquipos()){
          nombre[0]= String.valueOf(e.id);
          nombre[1]= e.nombre;
