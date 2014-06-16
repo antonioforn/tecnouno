@@ -165,8 +165,9 @@ public class frmTorneoyEquipo extends javax.swing.JFrame {
         Query query = em.createQuery("SELECT id FROM Equipo eq WHERE nombre LIKE '" +cmbEquipos.getSelectedItem().toString() +"'");
         Equipo eq= em.find(Equipo.class, Integer.parseInt(query.getSingleResult().toString()));
         System.out.println(eq.getNombre()+ "  "+ tor.getNomTorneo());
-
+        
         eq.getTorneos().add(tor);
+        em.flush();
         em.getTransaction().commit();
         
         
