@@ -22,7 +22,7 @@ public class Equipo {
     @Id @GeneratedValue int id;
     String nombre;
     @ManyToMany(mappedBy="Equipos")
-    Set<Torneo> Torneos;
+    private Set<Torneo> Torneos;
 
     public Equipo(String Nombre) {
         this.nombre = Nombre;
