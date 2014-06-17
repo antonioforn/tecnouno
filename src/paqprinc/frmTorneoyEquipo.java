@@ -162,15 +162,16 @@ public class frmTorneoyEquipo extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        //em.getTransaction().begin();
+        em.getTransaction().begin();
         Torneo tor = em.find(Torneo.class, cmbTorneos.getSelectedItem().toString());   
-        Query query = em.createQuery("SELECT id FROM Equipo eq WHERE nombre LIKE '" +cmbEquipos.getSelectedItem().toString() +"'");
+        Query query = em.createQuery("SELECT idEquipo FROM Equipo eq WHERE nombre LIKE '" +cmbEquipos.getSelectedItem().toString() +"'");
         Equipo eq= em.find(Equipo.class, Integer.parseInt(query.getSingleResult().toString()));
+        em.getTransaction().commit();
         System.out.println(eq.getNombre()+ "  "+ tor.getNomTorneo());
         System.out.println(" Equipo= " + em.contains(eq) + " Torneo= " + em.contains(tor) );
         eq.getTorneos().add(tor);
         em.flush();
-        //em.getTransaction().commit();
+        
         
         
        cargarTabla();
