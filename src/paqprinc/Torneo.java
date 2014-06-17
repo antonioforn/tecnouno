@@ -29,7 +29,7 @@ public class Torneo {
         joinColumns= 
                 @JoinColumn(name="NombreTorneo", referencedColumnName="nomTorneo"),
         inverseJoinColumns=
-                @JoinColumn(name="Id_Equipo", referencedColumnName="id")
+                @JoinColumn(name="Id_Equipo", referencedColumnName="idEquipo")
         )
     Set<Equipo> Equipos;
 

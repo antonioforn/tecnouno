@@ -19,7 +19,7 @@ import javax.persistence.ManyToMany;
  */
 @Entity
 public class Equipo {
-    @Id @GeneratedValue int id;
+    @Id @GeneratedValue int idEquipo;
     String nombre;
     @ManyToMany(mappedBy="Equipos")
     private Set<Torneo> Torneos;

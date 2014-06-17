@@ -162,15 +162,15 @@ public class frmTorneoyEquipo extends javax.swing.JFrame {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        em.getTransaction().begin();
+        //em.getTransaction().begin();
         Torneo tor = em.find(Torneo.class, cmbTorneos.getSelectedItem().toString());   
         Query query = em.createQuery("SELECT id FROM Equipo eq WHERE nombre LIKE '" +cmbEquipos.getSelectedItem().toString() +"'");
         Equipo eq= em.find(Equipo.class, Integer.parseInt(query.getSingleResult().toString()));
         System.out.println(eq.getNombre()+ "  "+ tor.getNomTorneo());
-        //System.out.println(em.contains(eq) + " " );
+        System.out.println(" Equipo= " + em.contains(eq) + " Torneo= " + em.contains(tor) );
         eq.getTorneos().add(tor);
-        
-        em.getTransaction().commit();
+        em.flush();
+        //em.getTransaction().commit();
         
         
        cargarTabla();
@@ -238,14 +238,17 @@ void cargarTabla(){
 //        List<Arbitro> results = q1.getResultList();
 //        //System.out.println( results.toString());
         String[] nombre= new String[2];
-        Torneo tor = em.find(Torneo.class, cmbTorneos.getSelectedItem().toString());
+        String strTorn= new String();
+        strTorn= cmbTorneos.getSelectedItem().toString();
+        //System.out.println("strTorn= " + strTorn);
+        Torneo tor = em.find(Torneo.class, strTorn);
         
        if(tor.getEquipos()==null){
            System.out.println("No hay equipos que cargar en la tabla");
            return;   
        }
         for(Equipo e: tor.getEquipos()){
-         nombre[0]= String.valueOf(e.id);
+         nombre[0]= String.valueOf(e.idEquipo);
          nombre[1]= e.nombre;
             mtbl.addRow(nombre);
         }
