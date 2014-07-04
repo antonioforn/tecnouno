@@ -1,6 +1,7 @@
 package paqprinc;
 
-
+import paqprinc.Torneo;
+import paqprinc.Equipo;
 import java.util.List;
 import java.util.Set;
 import javax.persistence.EntityManager;
@@ -50,7 +51,11 @@ public class frmTorneoyEquipo extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         cmbTorneos = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable(){
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+        };
         jLabel2 = new javax.swing.JLabel();
         cmbEquipos = new javax.swing.JComboBox();
         btnAgregar = new javax.swing.JButton();
@@ -241,7 +246,7 @@ void cargarTabla(){
         String[] nombre= new String[2];
         String strTorn= new String();
         strTorn= cmbTorneos.getSelectedItem().toString();
-        //System.out.println("strTorn= " + strTorn);
+        System.out.println("strTorn= " + strTorn);
         Torneo tor = em.find(Torneo.class, strTorn);
         
        if(tor.getEquipos()==null){
